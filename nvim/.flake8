@@ -1,0 +1,8 @@
+
+[flake8]
+ignore = E501, E303, E226, E225
+  #E225  # missing ws around operator
+  #E226  # missing ws around arithmic operator
+  #E303  # too many blank lines
+  #E501  # line too long
+
