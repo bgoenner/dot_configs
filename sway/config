@@ -25,6 +25,9 @@ set $term kitty
 ### Output configuration
 #
 # Default wallpaper (more resolutions are available in /usr/share/backgrounds/sway/)
+
+include ~/.sway_display
+
 output * bg /usr/share/backgrounds/sway/Sway_Wallpaper_Blue_1920x1080.png fill
 
 include ~/.sway_display
@@ -220,6 +223,12 @@ bindsym $mod+r mode "resize"
 #        inactive_workspace #32323200 #32323200 #5c5c5c
 #    }
 #}
+
+#
+# Locking
+#
+include ./swaylock_config
+
 
 include /etc/sway/config.d/*.conf
 include ~/.config/sway/config.d/*
