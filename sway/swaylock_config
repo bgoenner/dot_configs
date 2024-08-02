@@ -1,0 +1,4 @@
+
+bindsym $mod+question exec swaylock \
+--color 000000
+
