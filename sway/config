@@ -229,6 +229,10 @@ bindsym $mod+r mode "resize"
 #
 include ./swaylock_config
 
+#
+# include for laptop
+#
+#include ~/.sway_laptop
 
 include /etc/sway/config.d/*.conf
 include ~/.config/sway/config.d/*
