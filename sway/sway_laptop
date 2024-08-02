@@ -1,5 +1,6 @@
 
-set $laptop <LAPTOP-DISPLAY>
+# copy this to the home directory
+set $laptop_display <LAPTOP-DISPLAY>
 bindswitch --reload --locked lid:on output $laptop disable
 bindswitch --reload --locked lid:off output $laptop enable
 
