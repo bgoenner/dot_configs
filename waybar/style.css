@@ -11,7 +11,7 @@
 /* color: rgba(53, 185, 171, 1); */
 window#waybar {
     color: rgba(54, 22, 142, 1);
-    background-color: rgba(83, 63, 79, 0.5);
+    background-color: rgba(83, 63, 79, 0.6);
     /*border-bottom: 3px solid rgba(53, 185, 171, 0.4);*/
     border-bottom: 3px solid rgba(54, 22, 142, 0.4);
 }
@@ -43,7 +43,7 @@ window#waybar.solo {
 
 #workspaces button.visible {
     /*color: rgba(115, 186, 37, 1);*/
-    color: rgba(14, 94, 34, 1);
+    color: rgba(10, 50, 240, 1);
 }
 
 #workspaces button.urgent {
@@ -82,13 +82,13 @@ window#waybar.solo {
 }
 
 #bluetooth.disabled {
-    color: rgba(128, 128, 128, 1);
+    color: rgba(218, 28, 28, 1);
 }
 
 #bluetooth.off {
-    color: rgba(128, 128, 128, 1);
+    color: rgba(218, 218, 218, 1);
 }
 
 #bluetooth.connected {
-    color: rgba(115, 186, 37, 1);
+    color: rgba(50, 45, 250, 1);
 }

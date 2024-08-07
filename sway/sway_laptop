@@ -5,3 +5,7 @@ bindswitch --reload --locked lid:on output $laptop disable
 bindswitch --reload --locked lid:off output $laptop enable
 
 exec_always ~/.dot_configs/sway/reload_sway.sh
+
+bindsym $mod+y output $laptop_display transform 90
+bindsym $mod+u output $laptop_display transform 0
+
