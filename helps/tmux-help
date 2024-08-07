@@ -1,0 +1,6 @@
+ctl+b/a -> c    --- new window
+ctl+b/a -> x    --- kill pane/window
+ctl+b/a -> %    --- split vert
+ctl+b/a -> "    --- split horz
+ctl+b/a -> {    --- move pane back
+ctl+b/a -> }    --- move pane forward
