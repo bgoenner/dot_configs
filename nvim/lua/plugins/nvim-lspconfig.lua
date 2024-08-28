@@ -91,7 +91,7 @@ local config = function()
 				return
 			end
 
-			vim.lsp.buf.format({ name = "efm" })
+      -- vim.lsp.buf.format({ name = "efm" })
 		end,
 	})
 end
