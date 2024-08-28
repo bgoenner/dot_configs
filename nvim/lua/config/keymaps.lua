@@ -14,6 +14,9 @@ keymap.set("n", "<leader>sv", ":vsplit<CR>", opts) -- Split Verically
 keymap.set("n", "<leader>sh", ":split<CR>", opts) -- Split Horizontally
 keymap.set("n", "<leader>sm", ":MaximizerToggle<CR>", opts) -- Toggle Minimize
 
+-- terminal
+keymap.set("n", "<leader>tt", ":rightbelow term<CR>", opts)
+
 -- Highlight
 vim.api.nvim_create_autocmd("TextYankPost", {
 	callback = function()
@@ -32,4 +35,3 @@ vim.api.nvim_set_keymap("n", "m#", "gcc", { noremap = false })
 vim.api.nvim_set_keymap("v", "<C-_>", "gcc", { noremap = false })
 vim.api.nvim_set_keymap("v", "<Leader>#", "gcc", { noremap = false })
 -- vim.api.nvim_set_keymap("v", "", "gcc", { noremap = false })
--- vim.api.nvim_set_keymap("i", "<C-3>", "gcc", { noremap = false })

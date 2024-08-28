@@ -91,7 +91,7 @@ end
 
 return {
 	"mfussenegger/nvim-dap",
-	lazy = false,
+	lazy = true,
 	-- config = function()
 	config = config,
 	-- keys = {
