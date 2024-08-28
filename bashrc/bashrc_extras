@@ -1,0 +1,4 @@
+
+# Sets Vi like terminal configuration
+# remember to set .inputrc
+set -o vi
