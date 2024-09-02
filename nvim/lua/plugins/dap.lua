@@ -22,7 +22,19 @@ local config = function()
 		else
 			cb({
 				type = "executable",
-				command = "/usr/bin/python3",
+        command = "python3",
+				-- command = "/usr/bin/python3",
+				-- command = "/usr/local/bin/python3",
+				-- command = function()
+    --       local cwd = vim.fn.getcwd()
+    --       if vim.fn.executable("~/mfda_env/bin/python3") == 1 then
+    --         return "~/mfda_env/bin/python3"
+    --       elseif vim.fn.executable("/usr/local/bin/python3") == 1 then
+    --         return "/usr/local/bin/python3"
+    --       else
+    --         return "/usr/bin/python3"
+    --       end
+    --     end,
 				args = { "-m", "debugpy.adapter" },
 				options = {
 					source_filetype = "python",
@@ -47,7 +59,9 @@ local config = function()
 					return cwd .. "/venv/bin/python3"
 				elseif vim.fn.executable(cwd .. "/.venv/bin/python3") == 1 then
 					return cwd .. "/.venv/bin/python3"
-				else
+				elseif vim.fn.executable("/usr/local/bin/python3") == 1 then
+          return "/usr/local/bin/python3"
+        else
 					return "/usr/bin/python3"
 				end
 			end,
@@ -59,26 +73,44 @@ local config = function()
 
 	vim.fn.sign_define("DapBreakpoint", { text = "🛑", texthl = "", linehl = "", numhl = "" })
 
+  -- local repl = require('dap.repl')
+  -- repl.commands = vim.tbl_extend('force', repl.commands, {
+  --   -- Add a new alias for the existing .exit command
+  --   exit = {'exit', '.exit', '.bye'},
+  --   -- Add your own commands; run `.echo hello world` to invoke
+  --   -- this function with the text "hello world"
+  --   custom_commands = {
+  --     -- ['.echo'] = function(text)
+  --     --   dap.repl.append(text)
+  --     -- end,
+  --     -- Hook up a new command to an existing dap function
+  --     ['.restart'] = dap.restart,
+  --     ['.log_debug'] = dap.set_log_level('DEBUG'),
+  --     ['.log_warn']  = dap.set_log_level('WARN'),
+  --     ['.log_error'] = dap.set_log_level('ERROR'),
+  --   },
+  -- })
+
 	local opts = { noremap = true, silent = true, buffer = bufnr }
 
 	-- keymaps
-	vim.keymap.set("n", "<Leader>5", "<cmd>DapNew<CR>", opts)
-	vim.keymap.set("n", "<Leader>v", "<cmd>DapContinue<CR>", opts)
-	vim.keymap.set("n", "<Leader>mo", "<cmd>DapStepOver<CR>", opts)
-	vim.keymap.set("n", "<Leader>mi", "<cmd>DapStepInto<CR>", opts)
-	vim.keymap.set("n", "<Leader>mO", "<cmd>DapStepOut<CR>", opts)
-	vim.keymap.set("n", "<Leader>b", "<cmd>DapToggleBreakpoint<CR>", opts)
-	vim.keymap.set("n", "<Leader>p", "<cmd>DapTerminate<CR>", opts)
+  -- vim.keymap.set("n", "<Leader>5", "<cmd>DapNew<CR>", opts)
+	-- vim.keymap.set("n", "<Leader>v", "<cmd>DapContinue<CR>", opts)
+	-- vim.keymap.set("n", "<Leader>mo", "<cmd>DapStepOver<CR>", opts)
+	-- vim.keymap.set("n", "<Leader>mi", "<cmd>DapStepInto<CR>", opts)
+	-- vim.keymap.set("n", "<Leader>mO", "<cmd>DapStepOut<CR>", opts)
+	-- vim.keymap.set("n", "<Leader>b", "<cmd>DapToggleBreakpoint<CR>", opts)
+	-- vim.keymap.set("n", "<Leader>p", "<cmd>DapTerminate<CR>", opts)
 	-- vim.keymap.set("n", "<Leader>lp", dap.set_breakpoint(nil, nil, vim.fn.input("Log point message: ")))
 
 	-- scopes, expression, sessions, frames, threads
-	vim.keymap.set("n", "<Leader>ms", function()
-		require("dap.ui.widgets").sidebar(widgets.scopes).open()
-	end, opts)
-
-	vim.keymap.set("n", "<Leader>md", function()
-		require("dap").repl.open()
-	end, opts)
+	-- vim.keymap.set("n", "<Leader>ms", function()
+	-- 	require("dap.ui.widgets").sidebar(widgets.scopes).open()
+	-- end, opts)
+	--
+	-- vim.keymap.set("n", "<Leader>md", function()
+	-- 	require("dap").repl.open()
+	-- end, opts)
 	-- vim.keymap.set("n", "<Leader>dl", "<cmd>Dap")
 
 	-- for launching an external terminal

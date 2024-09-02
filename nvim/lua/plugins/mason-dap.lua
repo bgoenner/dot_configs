@@ -15,7 +15,9 @@ return {
 				python = function(cb, config)
 					config.adapters = {
 						type = "executable",
-						command = "/usr/bin/python3",
+            -- command = "/usr/bin/python3",
+						-- command = "/usr/local/bin/python3",
+						command = "python3",
 						args = { "-m", "debugpy.adapter" },
 						options = {
 							source_filetype = "python",
@@ -34,10 +36,17 @@ return {
 
 		-- keymaps
 		-- vim.keymap.set("n", "<Leader>5", "<cmd>DapNew<CR>", opts)
-		vim.keymap.set("n", "<Leader>5", function()
+		vim.keymap.set("n", "<Leader>3", function()
 			require("dap").continue()
 			require("dap").repl.open()
 			my_sidebar.open()
+		end, opts)
+		vim.keymap.set("n", "<Leader>5", function()
+			require("dap").repl.open()
+			my_sidebar.open()
+      -- DEBUG TRACE INFO WARN ERROR
+      require("dap").set_log_level("DEBUG")
+			require("dap").continue()
 		end, opts)
 		vim.keymap.set("n", "<Leader>4", function()
 			require("dap").restart()
@@ -47,13 +56,14 @@ return {
 		vim.keymap.set("n", "<Leader>mi", "<cmd>DapStepInto<CR>", opts)
 		vim.keymap.set("n", "<Leader>mO", "<cmd>DapStepOut<CR>", opts)
 		vim.keymap.set("n", "<Leader>bp", "<cmd>DapToggleBreakpoint<CR>", opts)
-		vim.keymap.set("n", "<Leader>p", "<cmd>DapTerminate<CR>", opts)
+		vim.keymap.set("n", "<Leader>pp", "<cmd>DapTerminate<CR>", opts)
 		vim.keymap.set("n", "<Leader>lp", function()
 			dap.set_breakpoint(nil, nil, vim.fn.input("Log point message: "))
 		end, opts)
 		vim.keymap.set("n", "<Leader>lo", function()
 			dap.set_breakpoint(nil, vim.fn.input("br-point stops: "), nil)
 		end, opts)
+    vim.keymap.set("n", "<leader>ll", "<cmd>vsplit ~/.cache/nvim/dap.log<CR>", opts)
 		-- vim.keymap.set("n", "<Leader>lb", function()
 		-- 	dap.list_breakpoints()
 		-- end, opts)
