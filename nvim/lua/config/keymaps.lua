@@ -1,8 +1,8 @@
 local keymap = vim.keymap
 
 -- Directory Navigation
-keymap.set("n", "<leader>m", ":NvimTreeFocus<CR>", { noremap = true, silent = true })
-keymap.set("n", "<leader>f", ":NvimTreeToggle<CR>", { noremap = true, silent = true })
+keymap.set("n", "<leader>mt", ":NvimTreeFocus<CR>", { noremap = true, silent = true })
+keymap.set("n", "<leader>ft", ":NvimTreeToggle<CR>", { noremap = true, silent = true })
 
 -- Pane Navigation
 keymap.set("n", "<C-h>", "<C-w>h", opts)

@@ -1,0 +1,16 @@
+
+<leader> v        - Continue (or start)
+<leader> m o      - Step over
+<leader> m i      - Step into
+<leader> m O      - Step Out
+<leader> b p      - toggle breakpoint
+<leader> p p      - terminate
+<leader> l p      - Log Point
+<leader> l o      - Log stOp
+<leader> l l      - open log
+
+<leader> m d      - Toggle Debugger
+
+<leader> 5        - Run and debug (LOGLEVEL DEBUG) 
+<leader> 4        - Restart
+<leader> 3        - Run and debug (LOGLEVEL unchanged) 
