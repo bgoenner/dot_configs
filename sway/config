@@ -26,12 +26,11 @@ set $term kitty
 #
 # Default wallpaper (more resolutions are available in /usr/share/backgrounds/sway/)
 
-output * bg ~/Pictures/Wallpapers/minimalist_carbon.png fill
+# output * bg ~/Pictures/Wallpapers/minimalist_carbon.png fill
+
 include ~/.sway_display
 
 # output * bg /usr/share/backgrounds/sway/Sway_Wallpaper_Blue_1920x1080.png fill
-
-# include ~/.sway_display
 
 #output "Dell Inc. SE2717H/HX 93JWK99717PS" pos 0 1200
 #
@@ -199,6 +198,12 @@ mode "resize" {
     bindsym Down resize grow height 10px
     bindsym Up resize shrink height 10px
     bindsym Right resize grow width 10px
+
+    # use plus and minus
+    bindsym Plus resize grow height 10px
+    bindsym Underscore resize shrink height 10px
+    bindsym Equal resize grow width 10px
+    bindsym Minus resize shrink width 10px
 
     # Return to default mode
     bindsym Return mode "default"
