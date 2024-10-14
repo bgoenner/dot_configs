@@ -52,11 +52,40 @@ local config = function()
 			},
 		},
 	})
+  -- openscad
+  lspconfig.openscad_lsp.setup({
+    capabilities = capabilities,
+    on_attach = on_attach,
+    settings = {},
+  })
+  -- latex
+  lspconfig.digestif.setup({
+    capabilities = capabilities,
+    on_attach = on_attach,
+    settings = {},
+  })
+  -- c++
+  lspconfig.clangd.setup({
+    capabilities = capabilities,
+    on_attach = on_attach,
+    settings = {},
+  })
 
+  -- lua
 	local luacheck = require("efmls-configs.linters.luacheck")
 	local stylua = require("efmls-configs.formatters.stylua")
+
+  -- python
 	local flake8 = require("efmls-configs.linters.flake8")
 	local black = require("efmls-configs.formatters.black")
+  local autopep8 = require("efmls-configs.formatters.autopep8")
+
+  -- makefile
+  local checkmake = require("efmls-configs.linters.checkmake")
+
+  -- c++
+  local clang_format = require("efmls-configs.formatters.clang_format")
+  local cpplint = require("efmls-configs.linters.cpplint")
 
 	-- configure efm server
 	lspconfig.efm.setup({
@@ -75,7 +104,9 @@ local config = function()
 		settings = {
 			languages = {
 				lua = { luacheck, stylua },
-				python = { flake8, black },
+				python = { flake8, autopep8 },
+        makefile = { checkmake },
+        cpp = { cpplint, clang_format }
 			},
 		},
 	})
@@ -85,13 +116,15 @@ local config = function()
 	vim.api.nvim_create_autocmd("BufWritePost", {
 		group = lsp_fmt_group,
 		callback = function()
-			local efm = vim.lsp.get_active_clients({ name = "efm" })
+      -- deprecated
+			-- local efm = vim.lsp.get_active_clients({ name = "efm" })
+			local efm = vim.lsp.get_clients({ name = "efm" })
 
 			if vim.tbl_isempty(efm) then
 				return
 			end
 
-      -- vim.lsp.buf.format({ name = "efm" })
+      vim.lsp.buf.format({ name = "efm" })
 		end,
 	})
 end
