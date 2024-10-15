@@ -1,4 +1,18 @@
 
 [flake8]
 
-extend-ignore = E501, E116, E221, E222, E231, E265
+extend-ignore = E501, E116, E221, E222, E231, E251, E265, E303
+
+
+# E116 Unexpected indentation (comment)
+
+# E221 multiple spaces before operator
+# E222 multiple spaces after operator
+# E231 missing WS after ',', ':', or ';'
+# E251 space indenting
+# E265 block comments should start with '# '
+
+# E3 blank line
+# E303 too many blank lines
+
+# E501 line too long

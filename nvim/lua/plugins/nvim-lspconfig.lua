@@ -117,8 +117,8 @@ local config = function()
 		group = lsp_fmt_group,
 		callback = function()
       -- deprecated
-			-- local efm = vim.lsp.get_active_clients({ name = "efm" })
-			local efm = vim.lsp.get_clients({ name = "efm" })
+			local efm = vim.lsp.get_active_clients({ name = "efm" })
+			-- local efm = vim.lsp.get_clients({ name = "efm" })
 
 			if vim.tbl_isempty(efm) then
 				return
