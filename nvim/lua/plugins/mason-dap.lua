@@ -15,7 +15,7 @@ return {
 				python = function(cb, config)
 					config.adapters = {
 						type = "executable",
-            -- command = "/usr/bin/python3",
+						-- command = "/usr/bin/python3",
 						-- command = "/usr/local/bin/python3",
 						command = "python3",
 						args = { "-m", "debugpy.adapter" },
@@ -44,26 +44,26 @@ return {
 		vim.keymap.set("n", "<Leader>5", function()
 			require("dap").repl.open()
 			my_sidebar.open()
-      -- DEBUG TRACE INFO WARN ERROR
-      require("dap").set_log_level("DEBUG")
+			-- DEBUG TRACE INFO WARN ERROR
+			require("dap").set_log_level("DEBUG")
 			require("dap").continue()
 		end, opts)
 		vim.keymap.set("n", "<Leader>4", function()
 			require("dap").restart()
 		end, opts)
 		vim.keymap.set("n", "<Leader>v", "<cmd>DapContinue<CR>", opts)
-		vim.keymap.set("n", "<Leader>mso", "<cmd>DapStepOver<CR>", opts)
-		vim.keymap.set("n", "<Leader>msi", "<cmd>DapStepInto<CR>", opts)
-		vim.keymap.set("n", "<Leader>msO", "<cmd>DapStepOut<CR>", opts)
-		vim.keymap.set("n", "<Leader>bp", "<cmd>DapToggleBreakpoint<CR>", opts)
-		vim.keymap.set("n", "<Leader>pp", "<cmd>DapTerminate<CR>", opts)
+		vim.keymap.set("n", "<Leader>tso", "<cmd>DapStepOver<CR>", opts)
+		vim.keymap.set("n", "<Leader>tsi", "<cmd>DapStepInto<CR>", opts)
+		vim.keymap.set("n", "<Leader>tsO", "<cmd>DapStepOut<CR>", opts)
+		vim.keymap.set("n", "<Leader>tp", "<cmd>DapToggleBreakpoint<CR>", opts)
+		vim.keymap.set("n", "<Leader>tp", "<cmd>DapTerminate<CR>", opts)
 		vim.keymap.set("n", "<Leader>lp", function()
 			dap.set_breakpoint(nil, nil, vim.fn.input("Log point message: "))
 		end, opts)
 		vim.keymap.set("n", "<Leader>lo", function()
 			dap.set_breakpoint(nil, vim.fn.input("br-point stops: "), nil)
 		end, opts)
-    vim.keymap.set("n", "<leader>ll", "<cmd>vsplit ~/.cache/nvim/dap.log<CR>", opts)
+		vim.keymap.set("n", "<leader>ll", "<cmd>vsplit ~/.cache/nvim/dap.log<CR>", opts)
 		-- vim.keymap.set("n", "<Leader>lb", function()
 		-- 	dap.list_breakpoints()
 		-- end, opts)
