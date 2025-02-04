@@ -1,5 +1,19 @@
 
+# tmux aliases
+
+alias tmux-ls="tmux list-sessions"
+alias tmux-code="tmux new-session -t code"
 alias tmux-help="cat $HELPS_DIR/tmux-help"
+
+# kitty aliases
+
+alias icat="kitten icat"
+alias kitdiff="kitten diff"
+alias kssh="echo 'kitten ssh'; kitten ssh"
+alias katssh="echo 'kitten ssh'; kitten ssh"
+alias kittransfer="kitten transfer"
+alias katdownload="kitten transfer"
+alias katupload="kitten transfer --direction=upload"
 
 # SCAD aliases
 
