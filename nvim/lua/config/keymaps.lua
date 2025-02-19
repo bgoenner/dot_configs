@@ -17,7 +17,7 @@ keymap.set("n", "<leader>sm", ":MaximizerToggle<CR>", opts) -- Toggle Minimize
 -- terminal
 keymap.set("n", "<leader>tt", ":rightbelow term<CR>", opts)
 
--- Highlight
+-- Highlight on yank
 vim.api.nvim_create_autocmd("TextYankPost", {
 	callback = function()
 		vim.highlight.on_yank({ timeout = 200 })

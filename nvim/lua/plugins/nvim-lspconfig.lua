@@ -70,6 +70,12 @@ local config = function()
 		on_attach = on_attach,
 		settings = {},
 	})
+	-- json
+	lspconfig.biome.setup({
+		capabilities = capabilities,
+		on_attach = on_attach,
+		settings = {},
+	})
 
 	-- lua
 	local luacheck = require("efmls-configs.linters.luacheck")
@@ -90,6 +96,10 @@ local config = function()
 	-- Dockerfile
 	local dockerfile_lint = require("efmls-configs.linters.hadolint")
 
+	--json, jsonc
+	-- local biome_lint = require("efmls-configs.linters.biome")
+	local biome_form = require("efmls-configs.formatters.biome")
+
 	-- configure efm server
 	lspconfig.efm.setup({
 		filetypes = {
@@ -97,6 +107,8 @@ local config = function()
 			"python",
 			"cpp",
 			"dockerfile",
+			"json",
+			"jsonc",
 		},
 		init_options = {
 			documentFormatting = true,
@@ -113,6 +125,8 @@ local config = function()
 				makefile = { checkmake },
 				cpp = { cpplint, clang_format },
 				dockfile = { dockerfile_lint },
+				json = { biome_form },
+				jsonc = { biome_form },
 			},
 		},
 	})
