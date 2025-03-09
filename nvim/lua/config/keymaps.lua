@@ -35,3 +35,12 @@ vim.api.nvim_set_keymap("n", "m#", "gcc", { noremap = false })
 vim.api.nvim_set_keymap("v", "<C-->", "gcc", { noremap = false })
 vim.api.nvim_set_keymap("v", "<Leader>#", "gcc", { noremap = false })
 -- vim.api.nvim_set_keymap("v", "", "gcc", { noremap = false })
+
+-- Testing
+-- vim.api.nvim_create_user_command("SayHello", "echo 'HelloWorld'", {})
+-- vim.api.nvim_create_user_command("GetFile", "echo '" .. tostring(vim.fn.expand("%:p:r")) .. "'", {})
+-- vim.api.nvim_create_user_command("GetPos", function()
+-- 	print(tostring(vim.api.nvim_win_get_cursor(0)[1]))
+-- end, {})
+
+-- vim.api.nvim_create_user_command
