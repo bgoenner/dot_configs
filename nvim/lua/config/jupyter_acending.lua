@@ -7,6 +7,7 @@ local ascending_module = "jupyter_ascending"
 local python_ascending = python_call .. " -m " .. ascending_module
 
 local jupyter_asc_pattern = ".sync.py"
+local jupyter_cell_pattern = "# %%"
 
 local handle = os.execute
 
@@ -79,7 +80,18 @@ end
 
 local start_jupyter = function()
 	io.popen(python_call .. " -m jupyter notebook &> /dev/null")
-	--
+end
+
+local go_to_next_cell = function()
+	api.nvim_command("/# %%")
+end
+local go_to_prev_cell = function()
+	api.nvim_command("?# %%")
+end
+
+local ascend_exec_next = function()
+	ascend_exec()
+	go_to_next_cell()
 end
 
 local change_ascending_port = function()
@@ -90,15 +102,21 @@ end
 api.nvim_create_user_command("JupyterSync", "", {})
 api.nvim_create_user_command("JupyterExec", "", {})
 api.nvim_create_user_command("JupyterStartNotebook", start_jupyter, {})
+api.nvim_create_user_command("JupyterNextCell", go_to_next_cell, {})
+api.nvim_create_user_command("JupyterPrevCell", go_to_next_cell, {})
 
 api.nvim_create_user_command("AscendingMakePair", ascend_make_pair, {})
 api.nvim_create_user_command("AscendingSync", ascend_sync, { bang = false })
 api.nvim_create_user_command("AscendingExec", ascend_exec, {})
+api.nvim_create_user_command("AscendingExecNext", ascend_exec_next, {})
 api.nvim_create_user_command("AscendingExecAll", ascend_exec_all, {})
 api.nvim_create_user_command("AscendingRestart", ascend_restart, {})
 
 keymap.set("n", "<Leader>je", "<cmd>AscendingExec<CR>", opts)
+keymap.set("n", "<Leader>jE", "<cmd>AscendingExecNext<CR>", opts)
 keymap.set("n", "<Leader>ja", "<cmd>AscendingExecAll<CR>", opts)
 keymap.set("n", "<Leader>js", "<cmd>AscendingSync<CR>", opts)
 keymap.set("n", "<Leader>jr", "<cmd>AscendingRestart<CR>", opts)
+keymap.set("n", "<Leader>jn", "<cmd>JupyterNextCell<CR>", opts)
+keymap.set("n", "<Leader>jp", "<cmd>JupyterPrevCell<CR>", opts)
 -- keymap.set("n", "<Leader>jt", "<cmd>JupyterStartNotebook<CR>", opts)
