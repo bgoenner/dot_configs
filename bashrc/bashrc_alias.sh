@@ -3,6 +3,7 @@
 
 alias tmux-ls="tmux list-sessions"
 alias tmux-code="tmux new-session -t code"
+alias tmux-base="tmux new-session -t base"
 alias tmux-help="cat $HELPS_DIR/tmux-help"
 
 # kitty aliases
@@ -18,6 +19,9 @@ alias katupload="kitten transfer --direction=upload"
 # SCAD aliases
 
 alias ls_scad_libraries="ls ~/.local/share/OpenSCAD/libraries"
+
+# flake8
+alias ln-flake8="ln -s ~/.dot_configs/flake8 .flake8"
 
 # general one-liners
 
