@@ -10,9 +10,16 @@ keymap.set("n", "<C-j>", "<C-w>j", opts)
 keymap.set("n", "<C-k>", "<C-w>k", opts)
 keymap.set("n", "<C-l>", "<C-w>l", opts)
 
+-- spliting
 keymap.set("n", "<leader>sv", ":vsplit<CR>", opts) -- Split Verically
 keymap.set("n", "<leader>sh", ":split<CR>", opts) -- Split Horizontally
 keymap.set("n", "<leader>sm", ":MaximizerToggle<CR>", opts) -- Toggle Minimize
+
+keymap.set("n", "<leader>tn", ":tabNext<CR>", opts)
+keymap.set("n", "<leader>tb", ":tabprevious<CR>", opts)
+keymap.set("n", "<leader>tN", ":tabnew<CR>", opts)
+keymap.set("n", "<leader>ts", ":tab split<CR>", opts)
+keymap.set("n", "<leader>tq", ":tabclose<CR>", opts)
 
 -- terminal
 keymap.set("n", "<leader>tt", ":rightbelow term<CR>", opts)
