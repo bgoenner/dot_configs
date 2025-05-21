@@ -28,7 +28,7 @@ set $term kitty
 
 # output * bg ~/Pictures/Wallpapers/minimalist_carbon.png fill
 
-include ~/.sway_display
+include ~/.sway_display.conf
 
 # output * bg /usr/share/backgrounds/sway/Sway_Wallpaper_Blue_1920x1080.png fill
 
@@ -250,7 +250,18 @@ bar {
 #
 # Locking
 #
-include ./custom_swaylock.config
+#include home/bg/.dot_configs/sway/custom_swaylock.config'
+
+set $screenlock 'swaylock --config /home/bg/.config/sway/local/sway_nob_lock.config'
+# Idle configuration
+exec swayidle -w \
+         timeout 900 $screenlock \
+           timeout 960 'swaymsg "output * power off"' \
+              resume 'swaymsg "output * power on"' \
+         before-sleep $screenlock
+
+bindsym $mod+Ctrl+p $screenlock
+#bindsym $mod+p $screenlock/custom_swaylock.config
 
 #### Default openSUSE config for sway
 # Copy this to ~/.config/sway/config.d/

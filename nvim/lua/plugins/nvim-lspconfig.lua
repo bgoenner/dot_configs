@@ -52,46 +52,63 @@ local config = function()
 			},
 		},
 	})
-  -- openscad
-  lspconfig.openscad_lsp.setup({
-    capabilities = capabilities,
-    on_attach = on_attach,
-    settings = {},
-  })
-  -- latex
-  lspconfig.digestif.setup({
-    capabilities = capabilities,
-    on_attach = on_attach,
-    settings = {},
-  })
-  -- c++
-  lspconfig.clangd.setup({
-    capabilities = capabilities,
-    on_attach = on_attach,
-    settings = {},
-  })
+	-- openscad
+	lspconfig.openscad_lsp.setup({
+		capabilities = capabilities,
+		on_attach = on_attach,
+		settings = {},
+	})
+	-- latex
+	lspconfig.digestif.setup({
+		capabilities = capabilities,
+		on_attach = on_attach,
+		settings = {},
+	})
+	-- c++
+	lspconfig.clangd.setup({
+		capabilities = capabilities,
+		on_attach = on_attach,
+		settings = {},
+	})
+	-- json
+	lspconfig.biome.setup({
+		capabilities = capabilities,
+		on_attach = on_attach,
+		settings = {},
+	})
 
-  -- lua
+	-- lua
 	local luacheck = require("efmls-configs.linters.luacheck")
 	local stylua = require("efmls-configs.formatters.stylua")
 
-  -- python
+	-- python
 	local flake8 = require("efmls-configs.linters.flake8")
 	local black = require("efmls-configs.formatters.black")
-  local autopep8 = require("efmls-configs.formatters.autopep8")
+	local autopep8 = require("efmls-configs.formatters.autopep8")
 
-  -- makefile
-  local checkmake = require("efmls-configs.linters.checkmake")
+	-- makefile
+	local checkmake = require("efmls-configs.linters.checkmake")
 
-  -- c++
-  local clang_format = require("efmls-configs.formatters.clang_format")
-  local cpplint = require("efmls-configs.linters.cpplint")
+	-- c++
+	local clang_format = require("efmls-configs.formatters.clang_format")
+	local cpplint = require("efmls-configs.linters.cpplint")
+
+	-- Dockerfile
+	local dockerfile_lint = require("efmls-configs.linters.hadolint")
+
+	--json, jsonc
+	-- local biome_lint = require("efmls-configs.linters.biome")
+	local biome_form = require("efmls-configs.formatters.biome")
 
 	-- configure efm server
 	lspconfig.efm.setup({
 		filetypes = {
 			"lua",
 			"python",
+			"cpp",
+			"dockerfile",
+			"json",
+			"jsonc",
 		},
 		init_options = {
 			documentFormatting = true,
@@ -105,8 +122,11 @@ local config = function()
 			languages = {
 				lua = { luacheck, stylua },
 				python = { flake8, autopep8 },
-        makefile = { checkmake },
-        cpp = { cpplint, clang_format }
+				makefile = { checkmake },
+				cpp = { cpplint, clang_format },
+				dockfile = { dockerfile_lint },
+				json = { biome_form },
+				jsonc = { biome_form },
 			},
 		},
 	})
@@ -116,7 +136,7 @@ local config = function()
 	vim.api.nvim_create_autocmd("BufWritePost", {
 		group = lsp_fmt_group,
 		callback = function()
-      -- deprecated
+			-- deprecated
 			local efm = vim.lsp.get_active_clients({ name = "efm" })
 			-- local efm = vim.lsp.get_clients({ name = "efm" })
 
@@ -124,7 +144,7 @@ local config = function()
 				return
 			end
 
-      vim.lsp.buf.format({ name = "efm" })
+			vim.lsp.buf.format({ name = "efm" })
 		end,
 	})
 end

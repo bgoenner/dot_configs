@@ -4,29 +4,32 @@ return {
 	config = function()
 		local mdap = require("mason-nvim-dap")
 		local dap = require("dap")
+		local dap_py = require("dap-python")
 		local widgets = require("dap.ui.widgets")
 
-		mdap.setup({
-			ensure_installed = { "stylua" },
-			handlers = {
-				function(config)
-					mdap.default_setup(config)
-				end,
-				python = function(cb, config)
-					config.adapters = {
-						type = "executable",
-            -- command = "/usr/bin/python3",
-						-- command = "/usr/local/bin/python3",
-						command = "python3",
-						args = { "-m", "debugpy.adapter" },
-						options = {
-							source_filetype = "python",
-						},
-					}
-					mdap.default_setup(config)
-				end,
-			},
-		})
+		-- mdap.setup({
+		-- 	ensure_installed = { "stylua" },
+		-- 	handlers = {
+		-- 		function(config)
+		-- 			mdap.default_setup(config)
+		-- 		end,
+		-- 		python = function(cb, config)
+		-- 			config.adapters = {
+		-- 				type = "executable",
+		-- 				-- command = "/usr/bin/python3",
+		-- 				-- command = "/usr/local/bin/python3",
+		-- 				-- command = "python3",
+		-- 				command = "~/Code/MFDA/mfda-env/bin/python3",
+		-- 				args = { "-m", "debugpy.adapter" },
+		-- 				options = {
+		-- 					source_filetype = "python",
+		-- 				},
+		-- 			}
+		-- 			mdap.default_setup(config)
+		-- 		end,
+		-- 	},
+		-- })
+		dap_py.setup("~/Code/MFDA/mfda-env/bin/python3")
 
 		vim.fn.sign_define("DapBreakpoint", { text = "🛑", texthl = "", linehl = "", numhl = "" })
 
@@ -44,26 +47,26 @@ return {
 		vim.keymap.set("n", "<Leader>5", function()
 			require("dap").repl.open()
 			my_sidebar.open()
-      -- DEBUG TRACE INFO WARN ERROR
-      require("dap").set_log_level("DEBUG")
+			-- DEBUG TRACE INFO WARN ERROR
+			require("dap").set_log_level("DEBUG")
 			require("dap").continue()
 		end, opts)
 		vim.keymap.set("n", "<Leader>4", function()
 			require("dap").restart()
 		end, opts)
 		vim.keymap.set("n", "<Leader>v", "<cmd>DapContinue<CR>", opts)
-		vim.keymap.set("n", "<Leader>mo", "<cmd>DapStepOver<CR>", opts)
-		vim.keymap.set("n", "<Leader>mi", "<cmd>DapStepInto<CR>", opts)
-		vim.keymap.set("n", "<Leader>mO", "<cmd>DapStepOut<CR>", opts)
-		vim.keymap.set("n", "<Leader>bp", "<cmd>DapToggleBreakpoint<CR>", opts)
-		vim.keymap.set("n", "<Leader>pp", "<cmd>DapTerminate<CR>", opts)
+		vim.keymap.set("n", "<Leader>tso", "<cmd>DapStepOver<CR>", opts)
+		vim.keymap.set("n", "<Leader>tsi", "<cmd>DapStepInto<CR>", opts)
+		vim.keymap.set("n", "<Leader>tsO", "<cmd>DapStepOut<CR>", opts)
+		vim.keymap.set("n", "<Leader>tb", "<cmd>DapToggleBreakpoint<CR>", opts)
+		vim.keymap.set("n", "<Leader>tp", "<cmd>DapTerminate<CR>", opts)
 		vim.keymap.set("n", "<Leader>lp", function()
 			dap.set_breakpoint(nil, nil, vim.fn.input("Log point message: "))
 		end, opts)
 		vim.keymap.set("n", "<Leader>lo", function()
 			dap.set_breakpoint(nil, vim.fn.input("br-point stops: "), nil)
 		end, opts)
-    vim.keymap.set("n", "<leader>ll", "<cmd>vsplit ~/.cache/nvim/dap.log<CR>", opts)
+		vim.keymap.set("n", "<leader>ll", "<cmd>vsplit ~/.cache/nvim/dap.log<CR>", opts)
 		-- vim.keymap.set("n", "<Leader>lb", function()
 		-- 	dap.list_breakpoints()
 		-- end, opts)
@@ -102,5 +105,6 @@ return {
 	dependencies = {
 		"williamboman/mason.nvim",
 		"mfussenegger/nvim-dap",
+		"mfussenegger/nvim-dap-python",
 	},
 }
