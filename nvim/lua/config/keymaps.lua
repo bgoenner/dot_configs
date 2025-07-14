@@ -21,6 +21,11 @@ keymap.set("n", "<C-j>", ":TmuxNavigateDown<CR>", opts)
 keymap.set("n", "<C-k>", ":TmuxNavigateUp<CR>", opts)
 keymap.set("n", "<C-l>", ":TmuxNavigateRight<CR>", opts)
 
+keymap.set("n", "<M-h>", "<C-w><", opts)
+keymap.set("n", "<M-->", "<C-w>-", opts)
+keymap.set("n", "<M-=>", "<C-w>+", opts)
+keymap.set("n", "<M-l>", "<C-w>>", opts)
+
 -- pane split
 keymap.set("n", "<leader>sv", ":vsplit<CR>", opts) -- Split Verically
 keymap.set("n", "<leader>sh", ":split<CR>", opts) -- Split Horizontally
@@ -52,6 +57,7 @@ vim.api.nvim_set_keymap("n", "<leader>#", "gcc", { noremap = false })
 vim.api.nvim_set_keymap("n", "m#", "gcc", { noremap = false })
 vim.api.nvim_set_keymap("v", "<C-->", "gcc", { noremap = false })
 vim.api.nvim_set_keymap("v", "<Leader>#", "gcc", { noremap = false })
+vim.api.nvim_set_keymap("v", "m#", "gcc", { noremap = false })
 -- vim.api.nvim_set_keymap("v", "", "gcc", { noremap = false })
 
 -- Testing
