@@ -26,6 +26,7 @@ local config = function()
 		auto_install = true,
 		highlight = {
 			enable = true, -- true
+      disable = {"latex"},
 			additional_vim_regex_highlight = true, -- true
 		},
 	})
