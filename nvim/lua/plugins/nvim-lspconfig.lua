@@ -5,7 +5,9 @@ local config = function()
 
 	local cmp_nvim_lsp = require("cmp_nvim_lsp")
 
-	local lspconfig = require("lspconfig")
+	local lspconfig = require("lspconfig") -- deprecated
+	-- local lspconfig = vim.lsp.config
+	-- use vim.lsp.config
 
 	local signs = { Error = "x", Warn = "!", Hint = "+ ", Info = "i" }
 
@@ -76,6 +78,12 @@ local config = function()
 		on_attach = on_attach,
 		settings = {},
 	})
+	-- javascript
+	lspconfig.eslint.setup({
+		capabilities = capabilities,
+		on_attach = on_attach,
+		settings = {},
+	})
 
 	-- lua
 	local luacheck = require("efmls-configs.linters.luacheck")
@@ -100,6 +108,9 @@ local config = function()
 	-- local biome_lint = require("efmls-configs.linters.biome")
 	local biome_form = require("efmls-configs.formatters.biome")
 
+	-- javascript
+	local eslint = require("efmls-configs.linters.eslint")
+
 	-- configure efm server
 	lspconfig.efm.setup({
 		filetypes = {
@@ -122,6 +133,7 @@ local config = function()
 			languages = {
 				lua = { luacheck, stylua },
 				python = { flake8, autopep8 },
+				javascript = { eslint, biome_form },
 				makefile = { checkmake },
 				cpp = { cpplint, clang_format },
 				dockfile = { dockerfile_lint },
