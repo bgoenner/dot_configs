@@ -5,13 +5,48 @@ local config = function()
 
 	local cmp_nvim_lsp = require("cmp_nvim_lsp")
 
-	local lspconfig = require("lspconfig") -- deprecated
-	-- local lspconfig = vim.lsp.config
-	-- use vim.lsp.config
+  -- local lspconfig = require("lspconfig")
+  local lsp = vim.lsp
+	local lspconfig = lsp.config
 
-	local signs = { Error = "x", Warn = "!", Hint = "+ ", Info = "i" }
+	local signs = {
+    Error = "x",
+    Warn = "!",
+    Hint = "+ ",
+    Info = "i"
+  }
+
+  vim.diagnostic.config()
+
+  --[[
+  vim.diagnostic.config({
+    signs =
+      {
+        name = "DiagnosticSign" .. 'Hint',
+        text = {
+          [vim.diagnostic.severity.ERROR] = signs['ERROR'],
+          [vim.diagnostic.severity.WARN] = signs['WARN'],
+          [vim.diagnostic.severity.HINT] = signs['HINT'],
+          [vim.diagnostic.severity.INFO] = signs['INFO'],
+        },
+        texthl = {
+          [vim.diagnostic.severity.ERROR] = '',
+          [vim.diagnostic.severity.WARN] = '',
+          [vim.diagnostic.severity.HINT] = '',
+          [vim.diagnostic.severity.INFO] = '',
+        },
+        numhl = {
+          [vim.diagnostic.severity.ERROR] = '',
+          [vim.diagnostic.severity.WARN] = '',
+          [vim.diagnostic.severity.HINT] = '',
+          [vim.diagnostic.severity.INFO] = '',
+        },
+      }
+  })
+  --]]
 
 	for type, icon in pairs(signs) do
+    -- vim.fn.sign_define(name, list)
 		local hl = "DiagnosticSign" .. type
 		vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = "" })
 	end
@@ -19,7 +54,8 @@ local config = function()
 	local capabilities = cmp_nvim_lsp.default_capabilities()
 
 	-- python
-	lspconfig.pyright.setup({
+	-- lspconfig.pyright.setup({
+  lspconfig('pyright', {
 		capabilities = capabilities,
 		on_attach = on_attach,
 		settings = {
@@ -33,9 +69,12 @@ local config = function()
 				},
 			},
 		},
-	})
+  })
+  lsp.enable('pyright')
+
 	-- lua
-	lspconfig.lua_ls.setup({
+	-- lspconfig.lua_ls.setup({
+  lspconfig('lua_ls', {
 		capabilities = capabilities,
 		on_attach = on_attach,
 		settings = {
@@ -54,36 +93,47 @@ local config = function()
 			},
 		},
 	})
+  lsp.enable('lua_ls')
+
 	-- openscad
+  --[[
 	lspconfig.openscad_lsp.setup({
 		capabilities = capabilities,
 		on_attach = on_attach,
 		settings = {},
 	})
+  --]]
+  lsp.enable('openscad_lsp')
+
 	-- latex
+  --[[
 	lspconfig.digestif.setup({
 		capabilities = capabilities,
 		on_attach = on_attach,
 		settings = {},
 	})
+  --]]
+  lsp.enable('digestif')
+
 	-- c++
+  --[[
 	lspconfig.clangd.setup({
 		capabilities = capabilities,
 		on_attach = on_attach,
 		settings = {},
 	})
+  --]]
+  lsp.enable('clangd')
+
 	-- json
+  --[[
 	lspconfig.biome.setup({
 		capabilities = capabilities,
 		on_attach = on_attach,
 		settings = {},
 	})
-	-- javascript
-	lspconfig.eslint.setup({
-		capabilities = capabilities,
-		on_attach = on_attach,
-		settings = {},
-	})
+  --]]
+  lsp.enable('biome')
 
 	-- lua
 	local luacheck = require("efmls-configs.linters.luacheck")
@@ -112,7 +162,8 @@ local config = function()
 	local eslint = require("efmls-configs.linters.eslint")
 
 	-- configure efm server
-	lspconfig.efm.setup({
+	--lspconfig.efm.setup({
+	lspconfig('efm', {
 		filetypes = {
 			"lua",
 			"python",
@@ -142,6 +193,7 @@ local config = function()
 			},
 		},
 	})
+  lsp.enable('efm')
 
 	-- Format on Save
 	local lsp_fmt_group = vim.api.nvim_create_augroup("LspFormattingGroup", {})
@@ -149,8 +201,8 @@ local config = function()
 		group = lsp_fmt_group,
 		callback = function()
 			-- deprecated
-			local efm = vim.lsp.get_active_clients({ name = "efm" })
-			-- local efm = vim.lsp.get_clients({ name = "efm" })
+			--- local efm = vim.lsp.get_active_clients({ name = "efm" })
+			local efm = vim.lsp.get_clients({ name = "efm" })
 
 			if vim.tbl_isempty(efm) then
 				return

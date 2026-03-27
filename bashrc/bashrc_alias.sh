@@ -16,9 +16,12 @@ alias kittransfer="kitten transfer"
 alias katdownload="kitten transfer"
 alias katupload="kitten transfer --direction=upload"
 
+alias kbright='kitten themes --reload-in=all H-PUX; export KDIM=False'
+alias kdim='kitten themes --reload-in=all duckbones; export KDIM=True'
+
 # SCAD aliases
 
-alias ls_scad_libraries="ls ~/.local/share/OpenSCAD/libraries"
+alias ls_scad-libraries="ls ~/.local/share/OpenSCAD/libraries"
 
 # flake8
 alias ln-flake8="ln -s ~/.dot_configs/flake8 .flake8"
