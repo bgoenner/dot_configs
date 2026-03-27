@@ -26,6 +26,11 @@ keymap.set("n", "<M-->", "<C-w>-", opts)
 keymap.set("n", "<M-=>", "<C-w>+", opts)
 keymap.set("n", "<M-l>", "<C-w>>", opts)
 
+-- vim format
+
+keymap.set("n", "<leader>fw", ":set wrap<CR>:set linebreak<CR>", opts) -- wrap text
+keymap.set("n", "<leader>fe", "", opts) --unwrap
+
 -- pane split
 keymap.set("n", "<leader>sv", ":vsplit<CR>", opts) -- Split Verically
 keymap.set("n", "<leader>sh", ":split<CR>", opts) -- Split Horizontally
